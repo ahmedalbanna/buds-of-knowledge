@@ -31,7 +31,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -55,9 +54,9 @@ fun ScreenLockOverlay(
             .background(
                 brush = Brush.verticalGradient(
                     colors = listOf(
-                        Color(0xFF1A237E),
-                        Color(0xFF0D47A1),
-                        Color(0xFF311B92)
+                        MaterialTheme.colorScheme.primary,
+                        MaterialTheme.colorScheme.secondary,
+                        MaterialTheme.colorScheme.tertiary
                     )
                 )
             )
@@ -72,13 +71,13 @@ fun ScreenLockOverlay(
             Box(
                 modifier = Modifier
                     .size(100.dp)
-                    .background(Color.White.copy(alpha = 0.2f), shape = RoundedCornerShape(50.dp)),
+                    .background(MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.2f), shape = RoundedCornerShape(50.dp)),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
                     imageVector = Icons.Default.Nightlight,
                     contentDescription = "وقت الراحة",
-                    tint = Color(0xFFFFD54F),
+                    tint = MaterialTheme.colorScheme.primaryContainer,
                     modifier = Modifier.size(60.dp)
                 )
             }
@@ -89,7 +88,7 @@ fun ScreenLockOverlay(
                 text = "حان وقت الراحة يا بطل! 🌙✨",
                 style = MaterialTheme.typography.headlineMedium.copy(
                     fontWeight = FontWeight.Bold,
-                    color = Color.White
+                    color = MaterialTheme.colorScheme.onPrimary
                 ),
                 textAlign = TextAlign.Center
             )
@@ -99,7 +98,7 @@ fun ScreenLockOverlay(
             Text(
                 text = "لقد انتهى وقت الشاشة المحدد لهذا اليوم لحماية عينيك. اذهب للعب مع عائلتك أو القراءة، وعد غداً لمزيد من المرح والنجوم! 🌟",
                 style = MaterialTheme.typography.bodyLarge.copy(
-                    color = Color.White.copy(alpha = 0.9f),
+                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.9f),
                     lineHeight = 26.sp
                 ),
                 textAlign = TextAlign.Center,
@@ -111,8 +110,8 @@ fun ScreenLockOverlay(
             Button(
                 onClick = { showPinDialog = true },
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFFFFB74D),
-                    contentColor = Color(0xFF3E2723)
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary
                 ),
                 shape = RoundedCornerShape(16.dp),
                 modifier = Modifier
@@ -122,7 +121,7 @@ fun ScreenLockOverlay(
             ) {
                 Icon(imageVector = Icons.Default.Lock, contentDescription = null)
                 Spacer(modifier = Modifier.padding(4.dp))
-                Text(text = "فتح بواسطة الوالدين 🔒", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Text(text = "فتح بواسطة الوالدين 🔒", style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold))
             }
         }
 
@@ -166,7 +165,7 @@ fun ScreenLockOverlay(
 
                     if (errorText.isNotEmpty()) {
                         Spacer(modifier = Modifier.height(8.dp))
-                        Text(text = errorText, color = MaterialTheme.colorScheme.error, fontSize = 14.sp)
+                        Text(text = errorText, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodyMedium)
                     }
 
                     Spacer(modifier = Modifier.height(20.dp))
@@ -186,7 +185,7 @@ fun ScreenLockOverlay(
                             .fillMaxWidth()
                             .height(50.dp)
                     ) {
-                        Text("تأكيد الفتح", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                        Text("تأكيد الفتح", style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold))
                     }
                 }
             }

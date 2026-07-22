@@ -5,30 +5,59 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 
 private val LightColorScheme = lightColorScheme(
     primary = KidsPrimary,
-    onPrimary = Color.White,
-    primaryContainer = KidsAccentYellow,
-    onPrimaryContainer = Color(0xFF3E2723),
+    onPrimary = KidsOnPrimary,
+    primaryContainer = KidsPrimaryContainer,
+    onPrimaryContainer = KidsOnPrimaryContainer,
     secondary = KidsSecondary,
-    onSecondary = Color.White,
-    secondaryContainer = Color(0xFFE1F5FE),
+    onSecondary = KidsOnSecondary,
+    secondaryContainer = KidsSecondaryContainer,
+    onSecondaryContainer = KidsOnSecondaryContainer,
     tertiary = KidsTertiary,
-    onTertiary = Color.White,
-    background = KidsBackgroundLight,
-    onBackground = Color(0xFF212121),
-    surface = KidsSurfaceLight,
-    onSurface = Color(0xFF212121),
-    surfaceVariant = KidsCardBg
+    onTertiary = KidsOnTertiary,
+    tertiaryContainer = KidsTertiaryContainer,
+    onTertiaryContainer = KidsOnTertiaryContainer,
+    background = KidsBackground,
+    onBackground = KidsOnBackground,
+    surface = KidsSurface,
+    onSurface = KidsOnSurface,
+    surfaceVariant = KidsSurfaceVariant,
+    onSurfaceVariant = KidsOnSurfaceVariant,
+    error = KidsError,
+    onError = KidsOnError,
+    errorContainer = KidsErrorContainer,
+    onErrorContainer = KidsOnErrorContainer,
+    outline = KidsOutline,
+    outlineVariant = KidsOutlineVariant
 )
 
 private val DarkColorScheme = darkColorScheme(
     primary = KidsDarkPrimary,
+    onPrimary = KidsDarkOnPrimary,
+    primaryContainer = KidsDarkPrimaryContainer,
+    onPrimaryContainer = KidsDarkOnPrimaryContainer,
     secondary = KidsDarkSecondary,
+    onSecondary = KidsDarkOnSecondary,
+    secondaryContainer = KidsDarkSecondaryContainer,
+    onSecondaryContainer = KidsDarkOnSecondaryContainer,
+    tertiary = KidsDarkTertiary,
+    onTertiary = KidsDarkOnTertiary,
+    tertiaryContainer = KidsDarkTertiaryContainer,
+    onTertiaryContainer = KidsDarkOnTertiaryContainer,
     background = KidsDarkBackground,
-    surface = KidsDarkSurface
+    onBackground = KidsDarkOnBackground,
+    surface = KidsDarkSurface,
+    onSurface = KidsDarkOnSurface,
+    surfaceVariant = KidsDarkSurfaceVariant,
+    onSurfaceVariant = KidsDarkOnSurfaceVariant,
+    error = KidsDarkError,
+    onError = KidsDarkOnError,
+    errorContainer = KidsDarkErrorContainer,
+    onErrorContainer = KidsDarkOnErrorContainer,
+    outline = KidsDarkOutline,
+    outlineVariant = KidsDarkOutlineVariant
 )
 
 @Composable

@@ -85,14 +85,14 @@ fun HomeScreen(
                     Text(
                         text = "جاهز لمغامرة جديدة في عالم المعرفة؟",
                         style = MaterialTheme.typography.bodyMedium,
-                        color = Color.Gray
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
 
                 // Stars Badge
                 Card(
                     shape = RoundedCornerShape(20.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFFFFF3E0)),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)),
                     elevation = CardDefaults.cardElevation(2.dp)
                 ) {
                     Row(
@@ -102,14 +102,14 @@ fun HomeScreen(
                         Icon(
                             imageVector = Icons.Default.Star,
                             contentDescription = "النجوم",
-                            tint = Color(0xFFFFB300),
+                            tint = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.size(24.dp)
                         )
                         Spacer(modifier = Modifier.width(6.dp))
                         Text(
                             text = "${progress.starsCount}",
                             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                            color = Color(0xFFE65100)
+                            color = MaterialTheme.colorScheme.onSecondaryContainer
                         )
                     }
                 }
@@ -224,7 +224,7 @@ fun HomeScreen(
                             )
                             .padding(horizontal = 10.dp, vertical = 6.dp)
                     ) {
-                        Text(text = "تحدث 🎤", color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                        Text(text = "تحدث 🎤", style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onPrimary))
                     }
                 }
             }
@@ -250,7 +250,7 @@ fun HomeScreen(
                         title = "الحروف والأصوات",
                         subtitle = "أ - ي بطاقات ناطقة",
                         icon = Icons.Default.MenuBook,
-                        badgeColor = Color(0xFFFF9800),
+                        badgeColor = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.weight(1f),
                         onClick = { onNavigateToLearn(0) }
                     )
@@ -259,7 +259,7 @@ fun HomeScreen(
                         title = "الأرقام والحساب",
                         subtitle = "١-١٠ وألعاب جمع وطرح",
                         icon = Icons.Default.Calculate,
-                        badgeColor = Color(0xFF0288D1),
+                        badgeColor = MaterialTheme.colorScheme.secondary,
                         modifier = Modifier.weight(1f),
                         onClick = { onNavigateToLearn(1) }
                     )
@@ -273,7 +273,7 @@ fun HomeScreen(
                         title = "النطق والكلمات",
                         subtitle = "قاموس الحيوانات والفواكه",
                         icon = Icons.Default.Psychology,
-                        badgeColor = Color(0xFF43A047),
+                        badgeColor = MaterialTheme.colorScheme.tertiary,
                         modifier = Modifier.weight(1f),
                         onClick = { onNavigateToLearn(2) }
                     )
@@ -282,7 +282,7 @@ fun HomeScreen(
                         title = "أناشيد وألعاب",
                         subtitle = "أنشودة النظافة ولعبة الذاكرة",
                         icon = Icons.Default.MusicNote,
-                        badgeColor = Color(0xFFE91E63),
+                        badgeColor = MaterialTheme.colorScheme.error,
                         modifier = Modifier.weight(1f),
                         onClick = { onNavigateToGames() }
                     )
@@ -305,7 +305,7 @@ fun HomeScreen(
                 Text(
                     text = "${activityLogs.size} نشاط",
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color.Gray
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
@@ -352,7 +352,7 @@ fun HomeScreen(
                             Box(
                                 modifier = Modifier
                                     .size(36.dp)
-                                    .background(Color(0xFFFFF8E1), CircleShape),
+                                    .background(MaterialTheme.colorScheme.surfaceVariant, CircleShape),
                                 contentAlignment = Alignment.Center
                             ) {
                                 Text(text = "🏅", fontSize = 18.sp)
@@ -366,7 +366,7 @@ fun HomeScreen(
                                 Text(
                                     text = log.category,
                                     style = MaterialTheme.typography.bodySmall,
-                                    color = Color.Gray
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }
                         }
@@ -375,13 +375,13 @@ fun HomeScreen(
                             Text(
                                 text = "+${log.starsEarned}",
                                 fontWeight = FontWeight.Bold,
-                                color = Color(0xFFE65100)
+                                color = MaterialTheme.colorScheme.onSecondaryContainer
                             )
                             Spacer(modifier = Modifier.width(2.dp))
                             Icon(
                                 imageVector = Icons.Default.Star,
                                 contentDescription = null,
-                                tint = Color(0xFFFFB300),
+                                tint = MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.size(18.dp)
                             )
                         }
@@ -441,7 +441,7 @@ fun CategoryHubCard(
                 Text(
                     text = subtitle,
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color.Gray,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 1
                 )
             }

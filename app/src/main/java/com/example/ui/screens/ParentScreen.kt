@@ -19,11 +19,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Analytics
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Security
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -43,7 +41,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -53,6 +50,7 @@ import androidx.compose.ui.unit.sp
 import com.example.data.entity.ActivityLogEntity
 import com.example.data.entity.ParentSettingsEntity
 import com.example.data.entity.UserProgressEntity
+import com.example.util.ArabicNumerals
 
 @Composable
 fun ParentScreen(
@@ -144,7 +142,7 @@ fun ParentGateView(
                 Text(
                     text = if (usePinMode) "أدخل الرمز السري للوالدين (الافتراضي 1234)" else "يرجى حل المسألة للتأكد من دخول ولي الأمر:",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Color.Gray
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
 
                 Spacer(modifier = Modifier.height(20.dp))
@@ -153,14 +151,13 @@ fun ParentGateView(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(Color(0xFFFFF8E1), shape = RoundedCornerShape(16.dp))
+                            .background(MaterialTheme.colorScheme.surfaceVariant, shape = RoundedCornerShape(16.dp))
                             .padding(16.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
                             text = gateQuestionText,
-                            fontSize = 28.sp,
-                            fontWeight = FontWeight.Bold,
+                            style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
                             color = MaterialTheme.colorScheme.primary
                         )
                     }
@@ -193,7 +190,7 @@ fun ParentGateView(
 
                 if (errorText.isNotEmpty()) {
                     Spacer(modifier = Modifier.height(8.dp))
-                    Text(text = errorText, color = MaterialTheme.colorScheme.error, fontSize = 14.sp)
+                    Text(text = errorText, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodyMedium)
                 }
 
                 Spacer(modifier = Modifier.height(20.dp))
@@ -210,7 +207,7 @@ fun ParentGateView(
                         .height(50.dp)
                         .testTag("parent_gate_submit_button")
                 ) {
-                    Text("دخول منطقة الوالدين", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                    Text("دخول منطقة الوالدين", style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold))
                 }
 
                 Spacer(modifier = Modifier.height(12.dp))
@@ -265,7 +262,7 @@ fun ParentDashboardView(
                         style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
                         color = MaterialTheme.colorScheme.primary
                     )
-                    Text(text = "لوحة التحكم وإدارة وقت الشاشة والتقدم", style = MaterialTheme.typography.bodySmall, color = Color.Gray)
+                    Text(text = "لوحة التحكم وإدارة وقت الشاشة والتقدم", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
 
                 Button(
@@ -308,9 +305,8 @@ fun ParentDashboardView(
                     Spacer(modifier = Modifier.height(12.dp))
 
                     Text(
-                        text = "الحد اليومي المحدد: ${screenTimeSlider.toInt()} دقيقة",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp,
+                        text = "الحد اليومي المحدد: ${ArabicNumerals.convert(screenTimeSlider.toInt().toString())} دقيقة",
+                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                         color = MaterialTheme.colorScheme.primary
                     )
 
@@ -326,8 +322,8 @@ fun ParentDashboardView(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(text = "10 دقائق", fontSize = 12.sp, color = Color.Gray)
-                        Text(text = "120 دقيقة (ساعتان)", fontSize = 12.sp, color = Color.Gray)
+                        Text(text = "${ArabicNumerals.convert("10")} دقائق", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(text = "${ArabicNumerals.convert("120")} دقيقة (ساعتان)", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
 
                     Spacer(modifier = Modifier.height(12.dp))
@@ -402,7 +398,7 @@ fun ParentDashboardView(
 
                     if (pinSuccessText.isNotEmpty()) {
                         Spacer(modifier = Modifier.height(4.dp))
-                        Text(text = pinSuccessText, color = Color(0xFF2E7D32), fontSize = 13.sp)
+                        Text(text = pinSuccessText, color = MaterialTheme.colorScheme.tertiary, style = MaterialTheme.typography.bodyMedium)
                     }
 
                     Spacer(modifier = Modifier.height(8.dp))
@@ -446,18 +442,18 @@ fun ParentDashboardView(
                         horizontalArrangement = Arrangement.SpaceAround
                     ) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text(text = "⭐ ${progress.starsCount}", fontSize = 22.sp, fontWeight = FontWeight.Bold, color = Color(0xFFE65100))
-                            Text(text = "مجموع النجوم", fontSize = 12.sp, color = Color.Gray)
+                            Text(text = "⭐ ${ArabicNumerals.convert(progress.starsCount.toString())}", style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold), color = MaterialTheme.colorScheme.primary)
+                            Text(text = "مجموع النجوم", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
 
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text(text = "🔥 ${progress.dailyStreakDays}", fontSize = 22.sp, fontWeight = FontWeight.Bold, color = Color(0xFFD84315))
-                            Text(text = "أيام الاستمرار", fontSize = 12.sp, color = Color.Gray)
+                            Text(text = "🔥 ${ArabicNumerals.convert(progress.dailyStreakDays.toString())}", style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold), color = MaterialTheme.colorScheme.error)
+                            Text(text = "أيام الاستمرار", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
 
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text(text = "⏱️ ${parentSettings.timeUsedTodaySeconds / 60}", fontSize = 22.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
-                            Text(text = "دقائق الاستخدام اليوم", fontSize = 12.sp, color = Color.Gray)
+                            Text(text = "⏱️ ${ArabicNumerals.convert((parentSettings.timeUsedTodaySeconds / 60).toString())}", style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold), color = MaterialTheme.colorScheme.primary)
+                            Text(text = "دقائق الاستخدام اليوم", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
                 }
@@ -468,19 +464,19 @@ fun ParentDashboardView(
         item {
             Card(
                 shape = RoundedCornerShape(20.dp),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFFE8F5E9)),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Column(modifier = Modifier.padding(20.dp)) {
                     Text(
                         text = "💡 نصيحة تربوية لاستخدام آمن للتكنولوجيا:",
-                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold, color = Color(0xFF2E7D32))
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onTertiaryContainer)
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = "• شجّع طفلك على مشاركتك القصص والإجابات التي يتعلمها من الذكاء الاصطناعي.\n• احرص على الجمع بين التعلم الرقمي والألعاب الحركية الخارجية.\n• يُنصح بألا تتجاوز جلسة التعلم 30 دقيقة متواصلة لحماية النظر والتشتت.",
                         style = MaterialTheme.typography.bodyMedium.copy(lineHeight = 24.sp),
-                        color = Color(0xFF1B5E20)
+                        color = MaterialTheme.colorScheme.onTertiaryContainer
                     )
                 }
             }

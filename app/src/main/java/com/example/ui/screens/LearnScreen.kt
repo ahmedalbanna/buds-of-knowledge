@@ -43,12 +43,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.data.model.AlphabetItem
 import com.example.data.model.MathQuestion
 import com.example.data.model.NumberItem
@@ -81,7 +79,7 @@ fun LearnScreen(
                 Tab(
                     selected = selectedTabIndex == index,
                     onClick = { selectedTabIndex = index },
-                    text = { Text(text = title, fontWeight = FontWeight.Bold, fontSize = 14.sp) }
+                    text = { Text(text = title, style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold)) }
                 )
             }
         }
@@ -148,7 +146,7 @@ fun AlphabetsTab(
                 ) {
                     Text(
                         text = selectedLetter.emoji,
-                        fontSize = 42.sp
+                        style = MaterialTheme.typography.displayMedium
                     )
                     IconButton(
                         onClick = { ttsHelper.speak("${selectedLetter.letter}. ${selectedLetter.exampleWord}. ${selectedLetter.sentence}") },
@@ -166,8 +164,7 @@ fun AlphabetsTab(
 
                 Text(
                     text = selectedLetter.letter,
-                    fontSize = 72.sp,
-                    fontWeight = FontWeight.ExtraBold,
+                    style = MaterialTheme.typography.displayLarge.copy(fontWeight = FontWeight.ExtraBold),
                     color = MaterialTheme.colorScheme.primary
                 )
 
@@ -216,11 +213,11 @@ fun AlphabetsTab(
                         .size(70.dp)
                         .clip(RoundedCornerShape(18.dp))
                         .background(
-                            if (isSelected) MaterialTheme.colorScheme.primary else Color.White
+                            if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface
                         )
                         .border(
                             width = 2.dp,
-                            color = if (isSelected) MaterialTheme.colorScheme.primary else Color(0xFFFFE082),
+                            color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.primaryContainer,
                             shape = RoundedCornerShape(18.dp)
                         )
                         .clickable { onSelectLetter(item) },
@@ -229,13 +226,12 @@ fun AlphabetsTab(
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(
                             text = item.letter,
-                            fontSize = 24.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = if (isSelected) Color.White else MaterialTheme.colorScheme.onSurface
+                            style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
+                            color = if (isSelected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface
                         )
                         Text(
                             text = item.emoji,
-                            fontSize = 14.sp
+                            style = MaterialTheme.typography.bodySmall
                         )
                     }
                 }
@@ -276,7 +272,7 @@ fun NumbersAndMathTab(
             items(numbers) { num ->
                 Card(
                     shape = RoundedCornerShape(20.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color.White),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                     elevation = CardDefaults.cardElevation(2.dp),
                     modifier = Modifier
                         .width(100.dp)
@@ -293,8 +289,7 @@ fun NumbersAndMathTab(
                     ) {
                         Text(
                             text = num.arabicDigit,
-                            fontSize = 32.sp,
-                            fontWeight = FontWeight.ExtraBold,
+                            style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.ExtraBold),
                             color = MaterialTheme.colorScheme.secondary
                         )
                         Text(
@@ -304,7 +299,7 @@ fun NumbersAndMathTab(
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
                             text = num.emoji.repeat(num.itemsCount.coerceAtMost(3)),
-                            fontSize = 16.sp
+                            style = MaterialTheme.typography.titleMedium
                         )
                     }
                 }
@@ -337,7 +332,7 @@ fun NumbersAndMathTab(
                     Text(
                         text = "مسألة ${currentQuestionIndex + 1} من ${mathQuestions.size}",
                         style = MaterialTheme.typography.bodySmall,
-                        color = Color.Gray
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
 
@@ -347,20 +342,19 @@ fun NumbersAndMathTab(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(Color(0xFFE0F7FA), shape = RoundedCornerShape(20.dp))
+                        .background(MaterialTheme.colorScheme.secondaryContainer, shape = RoundedCornerShape(20.dp))
                         .padding(20.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(
                             text = "${currentQuestion.emojiTopic} ".repeat(currentQuestion.num1),
-                            fontSize = 20.sp
+                            style = MaterialTheme.typography.titleLarge
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
                             text = "${currentQuestion.num1} ${currentQuestion.operation} ${currentQuestion.num2} = ؟",
-                            fontSize = 36.sp,
-                            fontWeight = FontWeight.Bold,
+                            style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold),
                             color = MaterialTheme.colorScheme.secondary
                         )
                     }
@@ -376,8 +370,8 @@ fun NumbersAndMathTab(
                     currentQuestion.options.forEach { option ->
                         val isThisSelected = selectedOption == option
                         val btnColor = when {
-                            isThisSelected && isCorrect == true -> Color(0xFF4CAF50)
-                            isThisSelected && isCorrect == false -> Color(0xFFE53935)
+                            isThisSelected && isCorrect == true -> MaterialTheme.colorScheme.tertiary
+                            isThisSelected && isCorrect == false -> MaterialTheme.colorScheme.error
                             else -> MaterialTheme.colorScheme.primaryContainer
                         }
 
@@ -401,9 +395,8 @@ fun NumbersAndMathTab(
                         ) {
                             Text(
                                 text = "$option",
-                                fontSize = 22.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = if (isThisSelected) Color.White else Color.Black
+                                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                                color = if (isThisSelected) MaterialTheme.colorScheme.onError else MaterialTheme.colorScheme.onSurface
                             )
                         }
                     }
@@ -416,13 +409,13 @@ fun NumbersAndMathTab(
                         Icon(
                             imageVector = Icons.Default.CheckCircle,
                             contentDescription = null,
-                            tint = Color(0xFF4CAF50)
+                            tint = MaterialTheme.colorScheme.tertiary
                         )
                         Spacer(modifier = Modifier.width(6.dp))
                         Text(
                             text = "أحسنت! إجابة أسطورية! +2 نجوم ⭐",
                             fontWeight = FontWeight.Bold,
-                            color = Color(0xFF2E7D32)
+                            color = MaterialTheme.colorScheme.onTertiaryContainer
                         )
                     }
                 }
@@ -473,7 +466,7 @@ fun VocabularyTab(
                     modifier = Modifier
                         .clip(RoundedCornerShape(20.dp))
                         .background(
-                            if (isSelected) MaterialTheme.colorScheme.primary else Color.White
+                            if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface
                         )
                         .clickable { selectedCategory = category }
                         .padding(horizontal = 16.dp, vertical = 8.dp)
@@ -481,7 +474,7 @@ fun VocabularyTab(
                     Text(
                         text = category,
                         fontWeight = FontWeight.Bold,
-                        color = if (isSelected) Color.White else Color.Black
+                        color = if (isSelected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface
                     )
                 }
             }
@@ -512,19 +505,18 @@ fun VocabularyTab(
                             .padding(16.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text(text = card.emoji, fontSize = 48.sp)
+                        Text(text = card.emoji, style = MaterialTheme.typography.displayMedium)
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             text = card.wordArabic,
-                            fontSize = 22.sp,
-                            fontWeight = FontWeight.Bold,
+                            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                             color = MaterialTheme.colorScheme.primary
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
                             text = card.category,
                             style = MaterialTheme.typography.bodySmall,
-                            color = Color.Gray
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -535,7 +527,7 @@ fun VocabularyTab(
                                 modifier = Modifier.size(20.dp)
                             )
                             Spacer(modifier = Modifier.width(4.dp))
-                            Text(text = "استمع", fontSize = 12.sp, color = MaterialTheme.colorScheme.secondary)
+                            Text(text = "استمع", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.secondary)
                         }
                     }
                 }

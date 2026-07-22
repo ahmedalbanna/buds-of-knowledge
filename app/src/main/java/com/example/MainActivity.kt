@@ -15,6 +15,7 @@ import androidx.compose.material.icons.filled.School
 import androidx.compose.material.icons.filled.SportsEsports
 import androidx.compose.material.icons.filled.SupervisorAccount
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
@@ -31,7 +32,6 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.LayoutDirection
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.ui.screens.AiStoriesScreen
 import com.example.ui.screens.GamesAndSongsScreen
@@ -123,8 +123,9 @@ fun BaraemAppContent(
                             label = {
                                 Text(
                                     text = item.title,
-                                    fontSize = 11.sp,
-                                    fontWeight = if (currentNavIndex == index) FontWeight.Bold else FontWeight.Normal
+                                    style = MaterialTheme.typography.labelSmall.copy(
+                                        fontWeight = if (currentNavIndex == index) FontWeight.Bold else FontWeight.Normal
+                                    )
                                 )
                             },
                             modifier = Modifier.testTag("nav_item_${item.name.lowercase()}")

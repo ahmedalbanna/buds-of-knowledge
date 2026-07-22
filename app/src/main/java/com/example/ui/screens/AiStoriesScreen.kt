@@ -44,7 +44,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -76,7 +75,7 @@ fun AiStoriesScreen(
                 Tab(
                     selected = selectedTabIndex == index,
                     onClick = { selectedTabIndex = index },
-                    text = { Text(text = title, fontWeight = FontWeight.Bold, fontSize = 13.sp) }
+                    text = { Text(text = title, style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold)) }
                 )
             }
         }
@@ -140,7 +139,7 @@ fun AskAiTab(
                             .background(MaterialTheme.colorScheme.primary, CircleShape),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text(text = "🧙‍♂️", fontSize = 28.sp)
+                        Text(text = "🧙‍♂️", style = MaterialTheme.typography.displaySmall)
                     }
 
                     Spacer(modifier = Modifier.width(12.dp))
@@ -223,7 +222,7 @@ fun AskAiTab(
                     ) {
                         Icon(imageVector = Icons.Default.Send, contentDescription = null)
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text("اسأل المعلم الذكي 🪄", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                        Text("اسأل المعلم الذكي 🪄", style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold))
                     }
                 }
             }
@@ -256,7 +255,7 @@ fun AskAiTab(
                 is AiResponseState.Success -> {
                     Card(
                         shape = RoundedCornerShape(20.dp),
-                        colors = CardDefaults.cardColors(containerColor = Color(0xFFFFFDE7)),
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
                         elevation = CardDefaults.cardElevation(3.dp),
                         modifier = Modifier.fillMaxWidth()
                     ) {
@@ -279,7 +278,7 @@ fun AskAiTab(
                                 ) {
                                     Icon(imageVector = Icons.Default.VolumeUp, contentDescription = null, modifier = Modifier.size(18.dp))
                                     Spacer(modifier = Modifier.width(4.dp))
-                                    Text("استمع 🔊", fontSize = 13.sp)
+                                    Text("استمع 🔊", style = MaterialTheme.typography.bodySmall)
                                 }
                             }
 
@@ -370,7 +369,7 @@ fun StoryGeneratorTab(
                             modifier = Modifier.padding(14.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Text(text = if (isSelected) "🟢" else "⚪", fontSize = 16.sp)
+                            Text(text = if (isSelected) "🟢" else "⚪", style = MaterialTheme.typography.titleMedium)
                             Spacer(modifier = Modifier.width(10.dp))
                             Text(
                                 text = topic,
@@ -412,7 +411,7 @@ fun StoryGeneratorTab(
             ) {
                 Icon(imageVector = Icons.Default.AutoAwesome, contentDescription = null)
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("أنشئ القصة الآن 🪄", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                Text("أنشئ القصة الآن 🪄", style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold))
             }
         }
 
@@ -430,7 +429,7 @@ fun StoryGeneratorTab(
                 is AiResponseState.Success -> {
                     Card(
                         shape = RoundedCornerShape(20.dp),
-                        colors = CardDefaults.cardColors(containerColor = Color(0xFFFFFDE7)),
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
                         elevation = CardDefaults.cardElevation(3.dp),
                         modifier = Modifier.fillMaxWidth()
                     ) {
@@ -480,12 +479,12 @@ fun StoryLibraryTab(
     if (savedStories.isEmpty()) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(text = "📚", fontSize = 48.sp)
+                Text(text = "📚", style = MaterialTheme.typography.displayMedium)
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = "لا توجد قصص محفوظة حتى الآن. أنشئ قصتك الأولى في صانع القصص!",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Color.Gray
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
@@ -526,7 +525,7 @@ fun StoryLibraryTab(
                                 Icon(
                                     imageVector = Icons.Default.Delete,
                                     contentDescription = "حذف القصة",
-                                    tint = Color.Red.copy(alpha = 0.7f)
+                                    tint = MaterialTheme.colorScheme.error.copy(alpha = 0.7f)
                                 )
                             }
                         }
